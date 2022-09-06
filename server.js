@@ -34,5 +34,6 @@ app.use(express.static("client/build"));
 app.get("*", (req, res) =>
   res.sendFile(`${__dirname}/client/build/index.html`)
 );
+console.log(__dirname);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`server listening on port ${PORT}`));
