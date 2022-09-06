@@ -2,6 +2,21 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "arc": {
+    "app": "react-hello",
+    "http": [
+      {
+        "/api": {
+          "method": "get",
+          "src": "/api"
+        }
+      }
+    ],
+    "static": {
+      "folder": "build",
+      "spa": true
+    }
+  },
   "dependencies": {
     "@emotion/react": "^11.4.0",
     "@headlessui/react": "^1.3.0",
