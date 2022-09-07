@@ -1,7 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const path = require("path");
 
 require("colors");
 dotenv.config();
@@ -31,7 +30,9 @@ app.use("/api/email", emailMsgRoute);
 // err handler -- put those below all routes
 app.use(notFound);
 app.use(errorHandler);
-
+app.use("/api", () => {
+  res.send("hellow");
+});
 if (process.env.NODE_ENV == "production") {
   const path = require("path");
 
