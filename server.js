@@ -1,6 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
+
 require("colors");
 dotenv.config();
 const dbConnect = require("./config/db/dbConnect");
@@ -30,10 +32,14 @@ app.use("/api/email", emailMsgRoute);
 app.use(notFound);
 app.use(errorHandler);
 
-app.use(express.static("client/build"));
-app.get("*", (req, res) =>
-  res.sendFile(`${__dirname}/client/build/index.html`)
-);
+if (process.env.NODE_ENV == "production") {
+  const path = require("path");
+
+  app.get("/", (req, res) => {
+    app.use(express.static(path.resolve(__dirname, "client", "build")));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 console.log(__dirname);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`server listening on port ${PORT}`));
